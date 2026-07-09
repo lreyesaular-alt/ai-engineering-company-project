@@ -17,7 +17,7 @@ También me interesa mucho el departamento de Tecnología porque será el encarg
 Reto de automatización que más me interesa.
 El reto que más me gustaría desarrollar es un sistema inteligente que analice las ventas históricas, el inventario disponible y el comportamiento de consumo de cada restaurante para recomendar automáticamente los pedidos de ingredientes. Creo que este proyecto combina análisis de datos, automatización e Inteligencia Artificial, además de estar muy relacionado con mi experiencia profesional en compras.
 
-Mi idea de Agente de IA
+## Mi idea de Agente de IA
 Me gustaría crear un agente de IA para el departamento de Compras y Proveedores.
 Este agente analizaría diariamente las ventas, el inventario disponible y el historial de consumo de cada restaurante. Con esa información recomendaría qué productos comprar, en qué cantidad y a qué proveedor.
 Además, podría generar alertas cuando detecte niveles bajos de inventario, aumentos importantes en los precios de los proveedores o posibles desperdicios de productos, ayudando a la empresa a tomar mejores decisiones.
