@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registro Brasa Points | Brasaland</title>
+  </head>
+  <body>
+    <header>
+      <h1>Registro Brasa Points</h1>
+    </header>
+
+    <main>
+      <section aria-labelledby="registro-brasa-points">
+        <h2 id="registro-brasa-points">Formulario de registro</h2>
+
+        <form action="#" method="post">
+          <fieldset>
+            <legend>Datos personales</legend>
+
+            <p>
+              <label for="nombre-completo">Nombre completo</label><br />
+              <input
+                id="nombre-completo"
+                name="nombreCompleto"
+                type="text"
+                autocomplete="name"
+                required
+              />
+            </p>
+
+            <p>
+              <label for="email">Email</label><br />
+              <input
+                id="email"
+                name="email"
+                type="email"
+                autocomplete="email"
+                required
+              />
+            </p>
+
+            <p>
+              <label for="telefono">Teléfono</label><br />
+              <input
+                id="telefono"
+                name="telefono"
+                type="tel"
+                autocomplete="tel"
+                required
+              />
+            </p>
+
+            <p>
+              <label for="pais">País</label><br />
+              <select id="pais" name="pais" required>
+                <option value="">Selecciona tu país</option>
+                <option value="colombia">Colombia</option>
+                <option value="estados-unidos">Estados Unidos</option>
+              </select>
+            </p>
+
+            <p>
+              <label for="ciudad">Ciudad</label><br />
+              <select id="ciudad" name="ciudad" required>
+                <option value="">Selecciona tu ciudad</option>
+                <option value="medellin">Medellín</option>
+                <option value="bogota">Bogotá</option>
+                <option value="cali">Cali</option>
+                <option value="miami">Miami</option>
+                <option value="orlando">Orlando</option>
+              </select>
+            </p>
+
+            <p>
+              <label for="ubicacion-favorita">Ubicación favorita de Brasaland</label><br />
+              <select id="ubicacion-favorita" name="ubicacionFavorita">
+                <option value="">Selecciona una ubicación (opcional)</option>
+                <optgroup label="Colombia - Medellín">
+                  <option value="el-poblado">Brasaland El Poblado</option>
+                  <option value="laureles">Brasaland Laureles</option>
+                  <option value="envigado">Brasaland Envigado</option>
+                  <option value="sabaneta">Brasaland Sabaneta</option>
+                </optgroup>
+                <optgroup label="Colombia - Bogotá">
+                  <option value="usaquen">Brasaland Usaquén</option>
+                  <option value="chapinero">Brasaland Chapinero</option>
+                  <option value="zona-rosa">Brasaland Zona Rosa</option>
+                </optgroup>
+                <optgroup label="Colombia - Cali">
+                  <option value="granada">Brasaland Granada</option>
+                  <option value="ciudad-jardin">Brasaland Ciudad Jardín</option>
+                  <option value="unicentro">Brasaland Unicentro</option>
+                </optgroup>
+                <optgroup label="Estados Unidos - Miami">
+                  <option value="brickell">Brasaland Brickell</option>
+                  <option value="coral-gables">Brasaland Coral Gables</option>
+                </optgroup>
+                <optgroup label="Estados Unidos - Orlando">
+                  <option value="downtown">Brasaland Downtown</option>
+                  <option value="international-drive">Brasaland International Drive</option>
+                </optgroup>
+              </select>
+            </p>
+
+            <fieldset>
+              <legend>Preferencias alimentarias</legend>
+              <p>
+                <input
+                  id="pref-sin-restricciones"
+                  name="preferenciasAlimentarias"
+                  type="checkbox"
+                  value="sin-restricciones"
+                />
+                <label for="pref-sin-restricciones">Sin restricciones</label>
+              </p>
+              <p>
+                <input
+                  id="pref-vegetariano"
+                  name="preferenciasAlimentarias"
+                  type="checkbox"
+                  value="vegetariano"
+                />
+                <label for="pref-vegetariano">Vegetariano</label>
+              </p>
+              <p>
+                <input
+                  id="pref-sin-gluten"
+                  name="preferenciasAlimentarias"
+                  type="checkbox"
+                  value="sin-gluten"
+                />
+                <label for="pref-sin-gluten">Sin gluten</label>
+              </p>
+              <p>
+                <input
+                  id="pref-otro"
+                  name="preferenciasAlimentarias"
+                  type="checkbox"
+                  value="otro"
+                />
+                <label for="pref-otro">Otro</label>
+              </p>
+            </fieldset>
+
+            <p>
+              <label for="como-nos-conociste">¿Cómo nos conociste?</label><br />
+              <select id="como-nos-conociste" name="comoNosConociste" required>
+                <option value="">Cuéntanos cómo conociste Brasaland</option>
+                <option value="redes-sociales">Redes sociales</option>
+                <option value="recomendacion">Recomendación</option>
+                <option value="pasando-por-el-local">Pasando por el local</option>
+                <option value="busqueda-en-internet">Búsqueda en internet</option>
+                <option value="otro">Otro</option>
+              </select>
+            </p>
+
+            <p>
+              <label for="fecha-nacimiento">Fecha de nacimiento</label><br />
+              <input id="fecha-nacimiento" name="fechaNacimiento" type="date" required />
+            </p>
+
+            <p>
+              <input
+                id="acepto-terminos"
+                name="aceptoTerminosPrograma"
+                type="checkbox"
+                value="si"
+                required
+              />
+              <label for="acepto-terminos">Acepto términos del programa</label>
+            </p>
+
+            <p>
+              <input
+                id="quiero-ofertas-email"
+                name="quieroRecibirOfertasPorEmail"
+                type="checkbox"
+                value="si"
+              />
+              <label for="quiero-ofertas-email">Quiero recibir ofertas por email</label>
+            </p>
+          </fieldset>
+
+          <p>
+            <button type="submit">Registrarme</button>
+          </p>
+        </form>
+      </section>
+    </main>
+    <script src="./validation.js"></script>
+  </body>
+</html>
