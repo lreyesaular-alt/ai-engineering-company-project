@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Panel interno de operaciones de Brasaland." />
+    <title>Brasaland Ops | Inicio</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Navegacion de administracion">
+        <div class="brand-block">
+          <span class="brand-mark" aria-hidden="true">B</span>
+          <div>
+            <p class="brand-name">Brasaland</p>
+            <p class="brand-context">Ops workspace</p>
+          </div>
+        </div>
+
+        <nav class="primary-nav">
+          <a class="nav-item nav-item-active" href="./" aria-current="page">
+            <span aria-hidden="true">&#9632;</span>
+            Inicio
+          </a>
+          <a class="nav-item" href="#ubicaciones">
+            <span aria-hidden="true">&#9673;</span>
+            Ubicaciones
+          </a>
+          <a class="nav-item" href="#operacion">
+            <span aria-hidden="true">&#9656;</span>
+            Operacion
+          </a>
+        </nav>
+
+        <div class="sidebar-footer">
+          <p class="eyebrow">Sesion interna</p>
+          <p class="signed-in">Brasaland Digital</p>
+          <p class="muted-text">Medellin HQ</p>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Panel de administracion</p>
+            <h1>Inicio operativo</h1>
+          </div>
+          <div class="topbar-meta">
+            <span class="status-dot" aria-hidden="true"></span>
+            <span>Datos de referencia</span>
+          </div>
+        </header>
+
+        <section class="welcome-band" aria-labelledby="welcome-title">
+          <div>
+            <p class="eyebrow accent-eyebrow">Brasaland Digital</p>
+            <h2 id="welcome-title">Una operacion, 14 restaurantes.</h2>
+            <p>
+              Supervisa la presencia de Brasaland en Colombia y Florida desde un unico espacio de trabajo.
+            </p>
+          </div>
+          <div class="welcome-year" aria-label="Ano de fundacion: 2008">
+            <span>Desde</span>
+            <strong>2008</strong>
+          </div>
+        </section>
+
+        <section id="operacion" class="metrics-grid" aria-label="Resumen de operacion">
+          <article class="metric-card">
+            <div class="metric-icon metric-icon-dark" aria-hidden="true">14</div>
+            <div>
+              <p class="metric-label">Restaurantes propios</p>
+              <p class="metric-value">14</p>
+              <p class="metric-note">Operacion binacional</p>
+            </div>
+          </article>
+          <article class="metric-card">
+            <div class="metric-icon metric-icon-green" aria-hidden="true">CO</div>
+            <div>
+              <p class="metric-label">Restaurantes en Colombia</p>
+              <p class="metric-value">10</p>
+              <p class="metric-note">Medellin, Bogota y Cali</p>
+            </div>
+          </article>
+          <article class="metric-card">
+            <div class="metric-icon metric-icon-orange" aria-hidden="true">FL</div>
+            <div>
+              <p class="metric-label">Restaurantes en Florida</p>
+              <p class="metric-value">4</p>
+              <p class="metric-note">Miami y Orlando</p>
+            </div>
+          </article>
+          <article class="metric-card">
+            <div class="metric-icon metric-icon-blue" aria-hidden="true">115</div>
+            <div>
+              <p class="metric-label">Personas en el equipo</p>
+              <p class="metric-value">115</p>
+              <p class="metric-note">Cocina, sala y corporativo</p>
+            </div>
+          </article>
+        </section>
+
+        <section id="ubicaciones" class="content-grid" aria-labelledby="locations-title">
+          <div class="panel locations-panel">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Cobertura</p>
+                <h2 id="locations-title">Ubicaciones por mercado</h2>
+              </div>
+              <span class="panel-badge">14 activas</span>
+            </div>
+            <div class="location-list">
+              <article class="location-row">
+                <div class="location-country">
+                  <span class="country-code country-code-co">CO</span>
+                  <div>
+                    <h3>Colombia</h3>
+                    <p>Medellin, Bogota y Cali</p>
+                  </div>
+                </div>
+                <strong>10</strong>
+              </article>
+              <article class="location-row">
+                <div class="location-country">
+                  <span class="country-code country-code-us">US</span>
+                  <div>
+                    <h3>Estados Unidos</h3>
+                    <p>Miami y Orlando, Florida</p>
+                  </div>
+                </div>
+                <strong>4</strong>
+              </article>
+            </div>
+          </div>
+
+          <aside class="panel principles-panel" aria-labelledby="principles-title">
+            <p class="eyebrow">Prioridades de marca</p>
+            <h2 id="principles-title">La misma promesa en cada local.</h2>
+            <ul>
+              <li><span aria-hidden="true">01</span> Calidad consistente</li>
+              <li><span aria-hidden="true">02</span> Experiencia calida</li>
+              <li><span aria-hidden="true">03</span> Rapidez en el servicio</li>
+            </ul>
+          </aside>
+        </section>
+
+        <footer class="page-footer">
+          <span>Brasaland Digital</span>
+          <span>Panel interno de referencia</span>
+        </footer>
+      </main>
+    </div>
+  </body>
+</html>
