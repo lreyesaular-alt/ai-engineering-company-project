@@ -183,7 +183,11 @@ export function NewCandidateForm({ onCreated }: NewCandidateFormProps) {
               className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm"
               disabled={isSubmitting}
             />
-            {errors.full_name && <p className="mt-1 text-sm text-rose-700">{errors.full_name}</p>}
+            {errors.full_name && (
+              <p role="alert" className="mt-1 text-sm text-rose-700">
+                {errors.full_name}
+              </p>
+            )}
           </div>
 
           <div>
@@ -198,7 +202,11 @@ export function NewCandidateForm({ onCreated }: NewCandidateFormProps) {
               className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm"
               disabled={isSubmitting}
             />
-            {errors.email && <p className="mt-1 text-sm text-rose-700">{errors.email}</p>}
+            {errors.email && (
+              <p role="alert" className="mt-1 text-sm text-rose-700">
+                {errors.email}
+              </p>
+            )}
           </div>
 
           <div>
@@ -213,7 +221,11 @@ export function NewCandidateForm({ onCreated }: NewCandidateFormProps) {
               className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm"
               disabled={isSubmitting}
             />
-            {errors.phone && <p className="mt-1 text-sm text-rose-700">{errors.phone}</p>}
+            {errors.phone && (
+              <p role="alert" className="mt-1 text-sm text-rose-700">
+                {errors.phone}
+              </p>
+            )}
           </div>
 
           <div>
@@ -228,7 +240,11 @@ export function NewCandidateForm({ onCreated }: NewCandidateFormProps) {
               className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm"
               disabled={isSubmitting}
             />
-            {errors.position && <p className="mt-1 text-sm text-rose-700">{errors.position}</p>}
+            {errors.position && (
+              <p role="alert" className="mt-1 text-sm text-rose-700">
+                {errors.position}
+              </p>
+            )}
           </div>
 
           <div>
@@ -245,7 +261,11 @@ export function NewCandidateForm({ onCreated }: NewCandidateFormProps) {
               className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm"
               disabled={isSubmitting}
             />
-            {errors.experience_years && <p className="mt-1 text-sm text-rose-700">{errors.experience_years}</p>}
+            {errors.experience_years && (
+              <p role="alert" className="mt-1 text-sm text-rose-700">
+                {errors.experience_years}
+              </p>
+            )}
           </div>
 
           <div>
@@ -264,7 +284,11 @@ export function NewCandidateForm({ onCreated }: NewCandidateFormProps) {
               <option value="selected">selected</option>
               <option value="discarded">discarded</option>
             </select>
-            {errors.status && <p className="mt-1 text-sm text-rose-700">{errors.status}</p>}
+            {errors.status && (
+              <p role="alert" className="mt-1 text-sm text-rose-700">
+                {errors.status}
+              </p>
+            )}
           </div>
 
           <div>
@@ -281,7 +305,11 @@ export function NewCandidateForm({ onCreated }: NewCandidateFormProps) {
               <option value="pending">pending</option>
               <option value="review">review</option>
             </select>
-            {errors.stage && <p className="mt-1 text-sm text-rose-700">{errors.stage}</p>}
+            {errors.stage && (
+              <p role="alert" className="mt-1 text-sm text-rose-700">
+                {errors.stage}
+              </p>
+            )}
           </div>
 
           <div>
@@ -331,10 +359,21 @@ export function NewCandidateForm({ onCreated }: NewCandidateFormProps) {
           </div>
 
           {submitSuccess && (
-            <p className="sm:col-span-2 rounded-md bg-emerald-100 px-3 py-2 text-sm text-emerald-700">{submitSuccess}</p>
+            <p
+              role="status"
+              aria-live="polite"
+              className="sm:col-span-2 rounded-md bg-emerald-100 px-3 py-2 text-sm text-emerald-700"
+            >
+              {submitSuccess}
+            </p>
           )}
           {submitError && (
-            <p className="sm:col-span-2 rounded-md bg-rose-100 px-3 py-2 text-sm text-rose-700">{submitError}</p>
+            <p
+              role="alert"
+              className="sm:col-span-2 rounded-md bg-rose-100 px-3 py-2 text-sm text-rose-700"
+            >
+              {submitError}
+            </p>
           )}
         </form>
       )}

@@ -343,7 +343,7 @@ export default function Home() {
   }
 
   async function handleUpdateStatus(nextStatus: CandidateStatus) {
-    if (!selectedCandidateId) return;
+    if (!selectedCandidateId) return false;
     const candidateId = selectedCandidateId;
 
     setIsUpdatingStatus(true);
@@ -357,15 +357,17 @@ export default function Home() {
           : { status: nextStatus, stage: "review" };
 
       const updatedCandidate = await patchRecordStatus(candidateId, payload);
-      if (selectedCandidateIdRef.current !== candidateId) return;
+      if (selectedCandidateIdRef.current !== candidateId) return false;
       updateCandidateInListAndDetail(updatedCandidate);
       setStatusUpdateSuccess("Estado actualizado correctamente.");
+      return true;
     } catch (error) {
-      if (selectedCandidateIdRef.current !== candidateId) return;
+      if (selectedCandidateIdRef.current !== candidateId) return false;
       const message = error instanceof Error ? error.message : "No se pudo actualizar el estado.";
       setStatusUpdateError(message);
+      return false;
     } finally {
-      if (selectedCandidateIdRef.current !== candidateId) return;
+      if (selectedCandidateIdRef.current !== candidateId) return false;
       setIsUpdatingStatus(false);
     }
   }
@@ -399,10 +401,16 @@ export default function Home() {
           <div className="rounded-xl border border-slate-200 bg-white p-4 sm:p-5">
             <h2 className="mb-4 text-lg font-semibold">Candidatos</h2>
 
-            {isLoadingList && <p className="text-sm text-slate-600">Cargando candidatos...</p>}
+            {isLoadingList && (
+              <p role="status" aria-live="polite" className="text-sm text-slate-600">
+                Cargando candidatos...
+              </p>
+            )}
 
             {listError && (
-              <p className="rounded-md bg-rose-100 px-3 py-2 text-sm text-rose-700">{listError}</p>
+              <p role="alert" className="rounded-md bg-rose-100 px-3 py-2 text-sm text-rose-700">
+                {listError}
+              </p>
             )}
 
             {!isLoadingList && !listError && !isSearchActive && candidates.length === 0 && (

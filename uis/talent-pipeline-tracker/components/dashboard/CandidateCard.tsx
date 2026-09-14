@@ -10,6 +10,10 @@ function formatStatus(status: string): string {
   return status.replace(/_/g, " ");
 }
 
+function getPipelineStatus(candidate: CandidateRecord): string {
+  return candidate.stage === "pending" ? "pending" : candidate.status;
+}
+
 export function CandidateCard({ candidate, isSelected, onSelect }: CandidateCardProps) {
   return (
     <button
@@ -32,7 +36,7 @@ export function CandidateCard({ candidate, isSelected, onSelect }: CandidateCard
         </p>
         <p>
           <span className={isSelected ? "text-slate-300" : "text-slate-500"}>Estado:</span>{" "}
-          {formatStatus(candidate.status)}
+          {formatStatus(getPipelineStatus(candidate))}
         </p>
         <p>
           <span className={isSelected ? "text-slate-300" : "text-slate-500"}>Experiencia:</span>{" "}

@@ -1,61 +1,81 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Talent Pipeline Tracker
 
-## Getting Started
+Dashboard interno para gestionar candidaturas: listado, filtros, busqueda, detalle, creacion, edicion, cambios de estado y notas.
 
-First, run the development server:
+## Requisitos
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- Node.js y npm.
+- Una API compatible con los endpoints usados por `lib/api.ts`.
+
+## Configuracion
+
+El cliente HTTP usa la variable `NEXT_PUBLIC_API_URL`. Crea un archivo `.env.local` en esta carpeta y configura la URL de la API:
+
+```env
+NEXT_PUBLIC_API_URL=<URL_DE_LA_API>
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Si la variable no esta configurada, las solicitudes muestran un error de configuracion.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Ejecucion
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Desde `uis/talent-pipeline-tracker/`:
 
-## Learn More
+```bash
+npm install
+npm run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+Otros scripts disponibles:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run lint
+npm run build
+npm run start
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Estructura funcional
 
-## Deploy on Vercel
+- `app/page.tsx`: coordina la carga, busqueda, filtros, seleccion, detalle, edicion, estados y notas.
+- `lib/api.ts`: cliente HTTP y funciones para acceder a la API.
+- `types/candidates.ts`: tipos de candidaturas, notas, respuestas y payloads.
+- `components/dashboard/CandidateList.tsx`: lista de candidaturas.
+- `components/dashboard/CandidateDetail.tsx`: detalle, edicion, cambio de estado y notas.
+- `components/dashboard/NewCandidateForm.tsx`: formulario de nuevas candidaturas y validacion en cliente.
+- `components/dashboard/StatusFilter.tsx`: filtros del pipeline.
+- `components/dashboard/SearchBar.tsx`: busqueda por nombre o email.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Endpoints utilizados
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Todos los endpoints se combinan con `NEXT_PUBLIC_API_URL`:
 
-## Prompts Used During Hito 3
+| Metodo | Ruta | Uso |
+| --- | --- | --- |
+| `GET` | `/records` | Carga registros y metadatos de paginacion. |
+| `GET` | `/records?page={page}&limit={limit}` | Carga una pagina concreta. |
+| `GET` | `/records/{id}` | Obtiene el detalle de una candidatura. |
+| `POST` | `/records` | Crea una candidatura. |
+| `PUT` | `/records/{id}` | Actualiza una candidatura. |
+| `PATCH` | `/records/{id}` | Actualiza parcialmente estado o etapa. |
+| `GET` | `/records/{id}/notes` | Obtiene las notas de una candidatura. |
+| `POST` | `/records/{id}/notes` | Crea una nota con `content`. |
+| `DELETE` | `/records/{id}/notes/{noteId}` | Elimina una nota. |
 
-This section documents the key prompts used to build and refine the Talent Pipeline Tracker during Hito 3.
+La respuesta paginada de registros tiene la forma `{ total, page, limit, data }`. Los IDs se manejan como strings.
 
-1. Initial dashboard build
-- Prompt summary: build a functional dashboard in Next.js + TypeScript + App Router + Tailwind connected to the real API (`NEXT_PUBLIC_API_URL`), including candidate list, status filters, search, detail panel, notes, and robust loading/error states.
+## `status` y `stage`
 
-2. API integration and real data alignment
-- Prompt summary: verify real API response shape and real status values before implementing assumptions, consume real endpoints with `fetch`, and avoid mock data.
+- `status` representa el estado de la candidatura y puede incluir `received`, `in_progress`, `selected` o `discarded`, entre otros valores string.
+- `stage` representa la etapa del pipeline. En la interfaz, una candidatura es `pending` cuando `stage === "pending"`.
+- Al actualizar a `pending`, la interfaz envia `status: "received"` y `stage: "pending"`.
+- Para los demas estados, envia el estado elegido y `stage: "review"`.
 
-3. New application form (POST /records)
-- Prompt summary: add only the new-candidacy form with client-side validation, submit to `POST /records`, prevent duplicate submit, show success/error feedback, clear form on success, and refresh the list.
+La tarjeta y el selector muestran `pending` a partir de la etapa para mantener consistente la representacion con el resto del pipeline.
 
-4. Corrections for pagination and filtering behavior
-- Prompt summary: fix issues where only partial records were loaded, ensure pagination logic is correct, and align pipeline filters with real `status`/`stage` behavior.
+## Busqueda y paginacion
 
-5. Edit, status change, and notes management
-- Prompt summary: add edit flow (`PUT /records/:id`), status update (`PATCH /records/:id`), note deletion with confirmation (`DELETE /records/:id/notes/:note_id`), and keep detail/list synchronized with loading/error feedback.
-
-6. Lint-driven refactor without behavior change
-- Prompt summary: fix `react-hooks/set-state-in-effect` warnings using minimal refactors, without changing UX, API contracts, or implemented functionality.
-
-7. Global search fix across all candidates
-- Prompt summary: keep page/limit pagination for normal navigation, but when typing in search, use the full candidate dataset (`getRecords()`), apply local search + current status/stage filters, cache full dataset, and return to paginated mode when search is empty.
+- La navegacion normal usa paginas de 20 registros mediante `GET /records?page={page}&limit={limit}`.
+- Al escribir una busqueda, la aplicacion obtiene el conjunto completo con `getRecords()`, que consulta las paginas necesarias y evita duplicados por ID.
+- La busqueda se aplica localmente sobre `full_name` y `email`, junto con el filtro de estado activo.
+- El conjunto completo se conserva en cache mientras la busqueda esta activa.
+- Al vaciar la busqueda, la aplicacion vuelve al modo paginado.

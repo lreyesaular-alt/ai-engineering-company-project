@@ -50,10 +50,16 @@ export function NotesSection({
         </button>
       </form>
 
-      {notesError && <p className="rounded-md bg-rose-100 px-3 py-2 text-sm text-rose-700">{notesError}</p>}
+      {notesError && (
+        <p role="alert" className="rounded-md bg-rose-100 px-3 py-2 text-sm text-rose-700">
+          {notesError}
+        </p>
+      )}
 
       {isLoadingNotes ? (
-        <p className="text-sm text-slate-600">Cargando notas...</p>
+        <p role="status" aria-live="polite" className="text-sm text-slate-600">
+          Cargando notas...
+        </p>
       ) : notes.length === 0 ? (
         <p className="text-sm text-slate-600">Aún no hay notas para este candidato.</p>
       ) : (

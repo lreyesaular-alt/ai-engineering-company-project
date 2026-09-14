@@ -36,7 +36,7 @@ interface CandidateDetailProps {
   onSubmitNote: (event: FormEvent<HTMLFormElement>) => void;
   onDeleteNote: (noteId: string) => void;
   onSaveEdit: (values: EditCandidateValues) => void;
-  onUpdateStatus: (status: CandidateStatus) => void;
+  onUpdateStatus: (status: CandidateStatus) => Promise<boolean>;
   onClose: () => void;
 }
 
@@ -152,11 +152,19 @@ export function CandidateDetail({
   }
 
   if (isLoadingDetail) {
-    return <p className="text-sm text-slate-600">Cargando detalle del candidato...</p>;
+    return (
+      <p role="status" aria-live="polite" className="text-sm text-slate-600">
+        Cargando detalle del candidato...
+      </p>
+    );
   }
 
   if (detailError) {
-    return <p className="rounded-md bg-rose-100 px-3 py-2 text-sm text-rose-700">{detailError}</p>;
+    return (
+      <p role="alert" className="rounded-md bg-rose-100 px-3 py-2 text-sm text-rose-700">
+        {detailError}
+      </p>
+    );
   }
 
   if (!candidate) {
@@ -231,7 +239,11 @@ export function CandidateDetail({
                 className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm"
                 disabled={isSavingEdit}
               />
-              {editErrors.full_name && <p className="mt-1 text-xs text-rose-700">{editErrors.full_name}</p>}
+              {editErrors.full_name && (
+                <p role="alert" className="mt-1 text-xs text-rose-700">
+                  {editErrors.full_name}
+                </p>
+              )}
             </div>
 
             <div>
@@ -246,7 +258,11 @@ export function CandidateDetail({
                 className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm"
                 disabled={isSavingEdit}
               />
-              {editErrors.email && <p className="mt-1 text-xs text-rose-700">{editErrors.email}</p>}
+              {editErrors.email && (
+                <p role="alert" className="mt-1 text-xs text-rose-700">
+                  {editErrors.email}
+                </p>
+              )}
             </div>
 
             <div>
@@ -261,7 +277,11 @@ export function CandidateDetail({
                 className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm"
                 disabled={isSavingEdit}
               />
-              {editErrors.phone && <p className="mt-1 text-xs text-rose-700">{editErrors.phone}</p>}
+              {editErrors.phone && (
+                <p role="alert" className="mt-1 text-xs text-rose-700">
+                  {editErrors.phone}
+                </p>
+              )}
             </div>
 
             <div>
@@ -276,7 +296,11 @@ export function CandidateDetail({
                 className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm"
                 disabled={isSavingEdit}
               />
-              {editErrors.position && <p className="mt-1 text-xs text-rose-700">{editErrors.position}</p>}
+              {editErrors.position && (
+                <p role="alert" className="mt-1 text-xs text-rose-700">
+                  {editErrors.position}
+                </p>
+              )}
             </div>
 
             <div>
@@ -296,7 +320,9 @@ export function CandidateDetail({
                 disabled={isSavingEdit}
               />
               {editErrors.experience_years && (
-                <p className="mt-1 text-xs text-rose-700">{editErrors.experience_years}</p>
+                <p role="alert" className="mt-1 text-xs text-rose-700">
+                  {editErrors.experience_years}
+                </p>
               )}
             </div>
 
@@ -352,8 +378,16 @@ export function CandidateDetail({
           </form>
         )}
 
-        {editSuccessMessage && <p className="text-sm text-emerald-700">{editSuccessMessage}</p>}
-        {editErrorMessage && <p className="text-sm text-rose-700">{editErrorMessage}</p>}
+        {editSuccessMessage && (
+          <p role="status" aria-live="polite" className="text-sm text-emerald-700">
+            {editSuccessMessage}
+          </p>
+        )}
+        {editErrorMessage && (
+          <p role="alert" className="text-sm text-rose-700">
+            {editErrorMessage}
+          </p>
+        )}
       </section>
 
       <section className="mt-6 space-y-3 rounded-lg border border-slate-200 bg-slate-50 p-4">
@@ -380,14 +414,27 @@ export function CandidateDetail({
           <button
             type="button"
             disabled={isUpdatingStatus || statusToSet === pipelineStatus}
-            onClick={() => onUpdateStatus(statusToSet)}
+            onClick={async () => {
+              const didUpdate = await onUpdateStatus(statusToSet);
+              if (didUpdate) {
+                setStatusToSet(statusToSet);
+              }
+            }}
             className="rounded-md bg-slate-900 px-3 py-2 text-sm font-medium text-white transition hover:bg-slate-700 disabled:cursor-not-allowed disabled:bg-slate-400"
           >
             {isUpdatingStatus ? "Actualizando..." : "Actualizar estado"}
           </button>
         </div>
-        {statusUpdateSuccess && <p className="text-sm text-emerald-700">{statusUpdateSuccess}</p>}
-        {statusUpdateError && <p className="text-sm text-rose-700">{statusUpdateError}</p>}
+        {statusUpdateSuccess && (
+          <p role="status" aria-live="polite" className="text-sm text-emerald-700">
+            {statusUpdateSuccess}
+          </p>
+        )}
+        {statusUpdateError && (
+          <p role="alert" className="text-sm text-rose-700">
+            {statusUpdateError}
+          </p>
+        )}
       </section>
 
       <div className="mt-5 space-y-3">
